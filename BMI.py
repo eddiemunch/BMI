@@ -53,7 +53,9 @@ def inputs():
     bmicalc()
 
 def bmicalc():
+    global selector
     global bmi
+    selector = 0
     bmi = weight/height**2
     print("your bmi is", bmi)
     f = open("BMI.txt", "w")
@@ -61,17 +63,40 @@ def bmicalc():
     f.close()
     if bmi > 30:
         print("you are clinically obese!")
+        selector = "1"
     if bmi < 18.5:
         print("you are one skinny thing, try to gain a bit of weight pls even though you probably wont")
+        selector = "2"
     if bmi > 18.5 and bmi < 25:
         print("you are just right! GOOD JOB GOLDILOCKS!")
-    if bmi > 25 and bmi < 30: print("you are a little chubby, maybe lay off the pringles once in a while!")
+        selector = "3"
+    if bmi > 25 and bmi < 30:
+        print("you are a little chubby, maybe lay off the pringles once in a while!")
+        selector = "4"
+
     save = input("would you like to save the results to file? (Y/N)\n")
     if save == "N":
         os.remove("BMI.txt")
+        print("files have not been saved")
     if save == "Y":
-        print("OKAY!")
+        print("File Saved!")
+    info()
     close()
+
+def info():
+    info = input("would you like any further information? (Y/N)\n") #yes I will actually write something normal for these but quite frankly I am lazy. Yes this is the most logical solution I dont care it was the one that came to my mind numbers are useful
+    info = info.upper()
+    if info == "Y":
+        if selector == "1":
+            print("okay! Fat")
+        if selector == "2":
+            print("skinny booger")
+        if selector == "3":
+            print("perfecto!")
+        if selector == "4":
+            print("lay off the pringelesl")
+    if info == "N":
+        pass
 
 def close():
     close = input("would you like to close the program? \n(Y/N) \n")
