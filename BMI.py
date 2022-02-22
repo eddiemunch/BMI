@@ -10,7 +10,7 @@ def measurements():
     global measurementH
     measurementW = input("what weight measurement would you like to use? \nkilograms  \nnewtons \ngrams \npounds \nstone \n\n")
     measurementW = measurementW.lower()
-    measurementH = input("What height measurement would you like to use? \nmeters \ncentimeters \nfeet \ninches \n\n")
+    measurementH = input("What height measurement would you like to use? \nmeters \ncentimeters \nfeet \ninches \nsmoots \nlight years \n\n")
     measurementH = measurementH.lower()
     inputs()
 
@@ -26,11 +26,6 @@ def inputs():
     if measurementW == "newtons":
         weight = float(input("Please enter your weight: "))
         weight = weight/9.81
-    if measurementH == "meters":
-        height = float(input("Please enter your height: "))
-    if measurementH == "centimeters":
-        height = float(input("Please enter your height: "))
-        height = height/100
     if measurementW == "grams":
         weight = float(input("Please enter your weight: "))
         weight = weight/1000
@@ -40,6 +35,11 @@ def inputs():
     if measurementW == "stone":
         weight = float(input("Please enter your weight: "))
         weight = weight*6.35
+    if measurementH == "meters":
+        height = float(input("Please enter your height: "))
+    if measurementH == "centimeters":
+        height = float(input("Please enter your height: "))
+        height = height/100
     if measurementH == "feet":
         print("for this we will split your height into inches and feet so first: ")
         feet = float(input("Please enter your height (feet excluding inches): "))
@@ -50,6 +50,12 @@ def inputs():
     if measurementH == "inches":
         height = float(input("Please enter your height: "))
         height = height/39.37
+    if measurementH == "smoots":
+        height = float(input("Please enter your height: "))
+        height = height*1.702
+    if measurementH == "light years": 
+        height = float(input("Please enter your height: "))
+        height = height*9.461*10**15 #this currently doesnt function well on account of me being slightly special and unable to input calculations, maybe unsupported, maybe needs a module WHO KNOWS
     bmicalc()
 
 def bmicalc():
@@ -84,7 +90,7 @@ def bmicalc():
     close()
 
 def info():
-    info = input("would you like any further information? (Y/N)\n") #yes I will actually write something normal for these but quite frankly I am lazy. Yes this is the most logical solution I dont care it was the one that came to my mind numbers are useful
+    info = input("would you like any further information? (Y/N)\n")#yes these will be useful eventually
     info = info.upper()
     if info == "Y":
         if selector == "1":
