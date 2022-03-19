@@ -2,10 +2,19 @@ import cmath
 import time
 import os
 from fileinput import close
+import sys
 def clear():
     os.system("cls")
 
+def type():
+    global string
+    for char in string:
+        sys.stdout.write(char)
+        sys.stdout.flush()
+        time.sleep(0.05)
+
 def measurements():
+    global string
     global measurementW
     global measurementH
     measurementW = input("what weight measurement would you like to use? \nkilograms  \nnewtons \ngrams \npounds \nstone \n\n")
@@ -53,14 +62,16 @@ def inputs():
     if measurementH == "smoots":
         height = float(input("Please enter your height: "))
         height = height*1.702
-    if measurementH == "light years": 
-        height = float(input("Please enter your height: "))
-        height = height*9.461*10**15 #this currently doesnt function well on account of me being slightly special and unable to input calculations, maybe unsupported, maybe needs a module WHO KNOWS
+    if measurementH == "light years":
+        height = float(input("Please enter the base number: "))
+        height = height**-16
+        height = height*9460730472580044 #this currently doesnt function well on account of me being slightly special and unable to input calculations, maybe unsupported, maybe needs a module WHO KNOWS
     bmicalc()
 
 def bmicalc():
     global selector
     global bmi
+    global string
     selector = 0
     bmi = weight/height**2
     print("your bmi is", bmi)
@@ -68,19 +79,24 @@ def bmicalc():
     f.write("your bmi is " + str(bmi))
     f.close()
     if bmi > 30:
-        print("you are clinically obese!")
+        string="you are clinically obese!"
+        type()
         selector = "1"
     if bmi < 18.5:
-        print("you are one skinny thing, try to gain a bit of weight pls even though you probably wont")
+        string="you are one skinny thing, try to gain a bit of weight pls even though you probably wont"
+        type()
         selector = "2"
     if bmi > 18.5 and bmi < 25:
-        print("you are just right! GOOD JOB GOLDILOCKS!")
+        string="you are just right! GOOD JOB GOLDILOCKS!"
+        type()
         selector = "3"
     if bmi > 25 and bmi < 30:
-        print("you are a little chubby, maybe lay off the pringles once in a while!")
+        string="you are a little chubby, maybe lay off the pringles once in a while!"
+        type()
         selector = "4"
-
-    save = input("would you like to save the results to file? (Y/N)\n")
+    string ="\nwould you like to save the results to file? (Y/N)\n"
+    type()
+    save = input()
     if save == "N":
         os.remove("BMI.txt")
         print("files have not been saved")
@@ -90,30 +106,42 @@ def bmicalc():
     close()
 
 def info():
-    info = input("would you like any further information? (Y/N)\n")#yes these will be useful eventually
+    global string
+    string="would you like any further information? (Y/N)\n"
+    type()
+    info = input()
     info = info.upper()
     if info == "Y":
         if selector == "1":
-            print("okay! Fat")
+            string= "Alright so, you are a literal chonker, I would recommend not being fat because well there are a multitude of reasons really!\nWell first of all, lets be honest it looks damned ugly if I am perfectly honest just like dont\nMOREOVER YOU MIGHT GET HEART DISEASES AND DIABETES AND ALL THAT JAZZ SO MAYBE AVOID THAT BUT FRANKLY NOT AS IMPORTANT AS NOT ACHIEVING THE ULTIMATE DRIP IF I AM PERFECLY HONEST."
+            type()
         if selector == "2":
-            print("skinny booger")
+           string="skinny booger\n"
+           type()
         if selector == "3":
-            print("perfecto!")
+            string="perfecto!"
+            type()
         if selector == "4":
-            print("lay off the pringelesl")
+            string="lay off the pringeles!"
+            type()
     if info == "N":
         pass
 
 def close():
-    close = input("would you like to close the program? \n(Y/N) \n")
+    global string
+    string="would you like to close the program? \n(Y/N) \n"
+    type()
+    close = input()
     close = close.upper()
     if close == "Y":
-        print("closing program")
+        string="closing program"
+        type()
         time.sleep(1)
         clear()
         exit()
     if close == "N":
-        print("looping program")
+        string="looping program"
+        type()
         time.sleep(1)
         clear()
         measurements()
